@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SarahCash - Préstamos rápidos</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0c2d48;
+      color: #ffffff;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #0c2d48;
+    }
+    header img {
+      height: 40px;
+    }
+    nav a {
+      color: #ffffff;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: 500;
+    }
+    .hero {
+      padding: 3rem 2rem;
+      background-color: #0c2d48;
+    }
+    .hero-text {
+      max-width: 500px;
+    }
+    .hero-text h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .hero-text p {
+      font-size: 1.2rem;
+    }
+    .loan-box {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 2rem;
+      color: #000000;
+      max-width: 340px;
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .loan-box h2 {
+      font-size: 2.2rem;
+      margin: 0.5rem 0;
+    }
+    .loan-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1rem 0 0.5rem;
+    }
+    .loan-controls button {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: none;
+      background-color: #b4d334;
+      color: #000000;
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .loan-box button {
+      background: linear-gradient(90deg, #7c3aed, #b4d334);
+      color: #fff;
+      border: none;
+      width: 100%;
+      padding: 1rem;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .loan-box button:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+    }
+    .loan-box p {
+      background-color: #d5efff;
+      padding: 1rem;
+      border-radius: 10px;
+      font-weight: 500;
+    }
+    .loan-box small {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      color: #555;
+    }
+    .benefits {
+      display: flex;
+      justify-content: space-around;
+      padding: 2rem;
+      background-color: #132e48;
+      font-weight: bold;
+    }
+    .benefits span {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .info-section {
+      background-color: #ffffff;
+      color: #000000;
+      padding: 2rem;
+    }
+    footer {
+      background: #0c2d48;
+      color: #ffffff;
+      text-align: center;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo_sarahcash.png" alt="SarahCash Logo" />
+    <nav>
+      <a href="#">Sobre nosotros</a>
+      <a href="#">Cómo funciona</a>
+      <a href="#">Ayuda</a>
+      <a href="#">Blog</a>
+      <a href="#" style="color: #a855f7; font-weight: bold;">Solicítalo ahora</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div style="text-align: center;">
+      <h1>Te prestamos hasta $500</h1>
+      <p>Consigue el dinero que necesitas ¡al instante! Sin complicaciones, 100% en línea.</p>
+    </div>
+    <div style="display: flex; justify-content: center;">
+      <div class="loan-box">
+      <div class="loan-controls">
+        <button onclick="changeAmount(-50)">−</button>
+        <h2>$<span id="amount">200</span></h2>
+        <button onclick="changeAmount(50)">+</button>
+      </div>
+      <p>Pago quincenal estimado:<br><strong>$<span id="payment">230.00</span></strong></p>
+      <button>¡Solicítalo ahora!</button>
+      <small>Necesitarás: Identificación oficial vigente y cuenta bancaria a tu nombre.</small>
+          </div>
+    </div>
+  </section>
+
+  <section class="image-section" style="background-color: #ffffff; padding: 2rem; text-align: center;">
+    <h2 style="color: #000000;">Conecta con tu oportunidad</h2>
+    <p style="color: #333333;">Agrega aquí una imagen que refleje confianza, velocidad o cercanía con tus clientes.</p>
+    <img src="tu_imagen_aqui.jpg" alt="Imagen Promocional" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+  </section>
+
+  <section class="benefits">
+    <span>✅ Fácil</span>
+    <span>✅ Seguro</span>
+    <span>✅ Rápido</span>
+  </section>
+
+  <section class="info-section">
+    <h2>¿Por qué elegir SarahCash?</h2>
+    <p>Con SarahCash, obtienes préstamos rápidos, sin complicaciones y totalmente en línea. Nuestro proceso es simple, transparente y confiable. Estamos aquí para ayudarte a cubrir tus necesidades financieras de forma segura.</p>
+    <p>Ofrecemos atención personalizada, sin comisiones ocultas y con total claridad en cada paso del proceso. Desde el momento en que solicitas tu préstamo hasta que lo pagas, te acompañamos con soluciones claras y justas.</p>
+  </section>
+
+  <footer>
+    &copy; 2025 SarahCash. Todos los derechos reservados.
+  </footer>
+
+  <script>
+    let currentAmount = 200;
+
+    function updateAmount(value) {
+      document.getElementById('amount').textContent = value;
+      let payment = 0;
+      const amount = parseFloat(value);
+      const interest = 0.15;
+
+      if (amount <= 250) {
+        payment = amount * (1 + interest);
+      } else {
+        payment = (amount * (1 + interest)) / 2;
+      }
+
+      document.getElementById('payment').textContent = payment.toFixed(2);
+    }
+
+    function changeAmount(change) {
+      const newAmount = currentAmount + change;
+      if (newAmount >= 200 && newAmount <= 500) {
+        currentAmount = newAmount;
+        updateAmount(currentAmount);
+      }
+    }
+
+    updateAmount(currentAmount);
+  </script>
+</body>
+</html>
