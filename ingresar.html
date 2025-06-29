@@ -112,7 +112,41 @@
         font-size: 1.5rem;
       }
     }
+
+.codigo-input {
+  width: 40px;
+  height: 50px;
+  font-size: 1.5rem;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+
+
+
   </style>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBxinKVnrNfpMXzUhsGXo2dnud_0cta9kw",
+    authDomain: "sarahcash-a1ec7.firebaseapp.com",
+    projectId: "sarahcash-a1ec7",
+    storageBucket: "sarahcash-a1ec7.firebasestorage.app",
+    messagingSenderId: "188571312617",
+    appId: "1:188571312617:web:1bea969d4cdfa1cfd92b78",
+    measurementId: "G-W4EFD7VJGQ"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+
 </head>
 <body>
 
@@ -240,9 +274,35 @@
       <label for="chkPromos">Acepto recibir noticias, ofertas e información relevante</label>
     </div>
 
-    <button id="btnPaso3" type="submit" style="background-color: #ccc; color: #666;" disabled>Siguiente</button>
+  <button type="button" id="btnPaso3" onclick="irAPaso4()" style="background-color: #ccc; color: #666;" disabled>Siguiente</button>
   </form>
 </section>
+
+<!-- Paso 4: Verificación por código SMS -->
+<section id="paso4" class="hidden">
+  <h1>Verifica tu número de celular</h1>
+  <p>Introduce el código de 6 dígitos que te enviamos por SMS al número registrado.</p>
+
+  <form id="codigoForm">
+    <div style="display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1rem;">
+      <input type="text" maxlength="1" class="codigo-input" />
+      <input type="text" maxlength="1" class="codigo-input" />
+      <input type="text" maxlength="1" class="codigo-input" />
+      <input type="text" maxlength="1" class="codigo-input" />
+      <input type="text" maxlength="1" class="codigo-input" />
+      <input type="text" maxlength="1" class="codigo-input" />
+    </div>
+
+    <div id="recaptcha-container"></div>
+
+    <p id="timer">¿No recibiste el código? Reenviar en <span id="countdown">30</span>s</p>
+    <button type="submit" id="verificarBtn" disabled style="background-color: #ccc;">Verificar</button>
+    <br><br>
+    <button type="button" onclick="reenviarCodigo()" id="reenviarBtn" disabled style="background-color: white; color: #0c2d48; border: 2px solid #0c2d48;">Reenviar código</button>
+  </form>
+</section>
+
+
 
 <script>
   const email3 = document.getElementById("email3");
@@ -376,6 +436,96 @@ function irAPaso3() {
   paso2.classList.add('hidden'); // Oculta el paso 2
   document.getElementById('paso3').classList.remove('hidden'); // Muestra el paso 3
 }
+
+
+  let confirmationResult;
+  let countdown = 30;
+  let timerInterval;
+
+  function irAPaso4() {
+    const phoneNumber = "+52" + document.getElementById("celular").value;
+
+    // Mostrar siguiente paso
+    document.getElementById("paso3").classList.add("hidden");
+    document.getElementById("paso4").classList.remove("hidden");
+
+    // Renderiza el captcha invisible
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+      size: 'invisible'
+    });
+
+    firebase.auth().signInWithPhoneNumber(phoneNumber, window.recaptchaVerifier)
+      .then(function (result) {
+        confirmationResult = result;
+        iniciarTemporizador();
+        console.log("Código enviado");
+      }).catch(function (error) {
+        alert("Error al enviar el SMS: " + error.message);
+      });
+  }
+
+  function reenviarCodigo() {
+    document.getElementById("recaptcha-container").innerHTML = ""; // Reinicia captcha
+    irAPaso4();
+  }
+
+  function iniciarTemporizador() {
+    document.getElementById("reenviarBtn").disabled = true;
+    countdown = 30;
+    document.getElementById("countdown").textContent = countdown;
+    clearInterval(timerInterval);
+
+    timerInterval = setInterval(() => {
+      countdown--;
+      document.getElementById("countdown").textContent = countdown;
+      if (countdown <= 0) {
+        clearInterval(timerInterval);
+        document.getElementById("reenviarBtn").disabled = false;
+      }
+    }, 1000);
+  }
+
+  // Unir inputs automáticamente
+  const inputs = document.querySelectorAll(".codigo-input");
+  inputs.forEach((input, index) => {
+    input.addEventListener("input", () => {
+      if (input.value.length === 1 && index < inputs.length - 1) {
+        inputs[index + 1].focus();
+      }
+      validarCodigoCompleto();
+    });
+  });
+
+  function validarCodigoCompleto() {
+    const code = [...inputs].map(i => i.value).join('');
+    const btn = document.getElementById("verificarBtn");
+
+    if (code.length === 6) {
+      btn.disabled = false;
+      btn.style.backgroundColor = "#0c2d48";
+      btn.style.color = "#fff";
+    } else {
+      btn.disabled = true;
+      btn.style.backgroundColor = "#ccc";
+      btn.style.color = "#666";
+    }
+  }
+
+  // Validar código al enviar
+  document.getElementById("codigoForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const code = [...inputs].map(i => i.value).join('');
+
+    confirmationResult.confirm(code)
+      .then(result => {
+        alert("✅ Número verificado correctamente.");
+        // Aquí podrías avanzar al siguiente paso (dashboard, resumen, etc.)
+      }).catch(error => {
+        alert("❌ Código incorrecto: " + error.message);
+      });
+  });
+</script>
+
 
 
   </script>
