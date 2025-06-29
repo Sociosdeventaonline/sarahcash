@@ -62,7 +62,8 @@
     }
 
     input[type="text"],
-    input[type="email"] {
+    input[type="email"],
+    input[type="tel"] {
       padding: 0.8rem;
       border: 1px solid #ccc;
       border-radius: 6px;
@@ -92,6 +93,16 @@
       background-color: #09314f;
     }
 
+    .hidden {
+      display: none;
+    }
+
+    #correoError {
+      color: red;
+      font-size: 0.9rem;
+      margin-top: 0.3rem;
+    }
+
     @media (max-width: 600px) {
       .form-group {
         flex: 1 1 100%;
@@ -110,74 +121,102 @@
   </header>
 
   <main>
-    <h1>Regístrate, por favor</h1>
-    <form id="registroForm">
-      <div class="form-row">
-        <div class="form-group">
-          <label for="nombre">Nombre</label>
-          <input type="text" id="nombre" name="nombre" required />
+    <!-- Primera sección: Registro inicial -->
+    <section id="paso1">
+      <h1>Regístrate, por favor</h1>
+      <form id="registroForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required />
+          </div>
+          <div class="form-group">
+            <label for="segundoNombre">Segundo nombre (en caso de tenerlo)</label>
+            <input type="text" id="segundoNombre" name="segundoNombre" />
+          </div>
         </div>
-        <div class="form-group">
-          <label for="segundoNombre">Segundo nombre (en caso de tenerlo)</label>
-          <input type="text" id="segundoNombre" name="segundoNombre" />
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="apellidoPaterno">Apellido paterno</label>
+            <input type="text" id="apellidoPaterno" name="apellidoPaterno" required />
+          </div>
+          <div class="form-group">
+            <label for="apellidoMaterno">Apellido materno</label>
+            <input type="text" id="apellidoMaterno" name="apellidoMaterno" required />
+          </div>
         </div>
-      </div>
 
-      <div class="form-row">
-        <div class="form-group">
-          <label for="apellidoPaterno">Apellido paterno</label>
-          <input type="text" id="apellidoPaterno" name="apellidoPaterno" required />
+        <div class="form-row">
+          <div class="form-group" style="flex: 1 1 100%;">
+            <label for="correo">Correo electrónico</label>
+            <input type="email" id="correo" name="correo" required />
+            <small id="correoError" style="display: none;">Ingresa un correo electrónico válido.</small>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="apellidoMaterno">Apellido materno</label>
-          <input type="text" id="apellidoMaterno" name="apellidoMaterno" required />
+
+        <div class="checkbox">
+          <input type="checkbox" id="noticias" name="noticias" />
+          <label for="noticias">Deseo recibir noticias sobre ofertas y promociones de SarahCash.</label>
         </div>
-      </div>
 
-      <div class="form-row">
-        <div class="form-group" style="flex: 1 1 100%;">
-          <label for="correo">Correo electrónico</label>
-          <input type="email" id="correo" name="correo" required />
-    <small id="correoError" style="color: red; display: none;">Ingresa un correo electrónico válido.</small>
-  </div>
-</div>
+        <button type="submit">Siguiente</button>
+      </form>
+    </section>
 
-      <div class="checkbox">
-        <input type="checkbox" id="noticias" name="noticias" />
-        <label for="noticias">Deseo recibir noticias sobre ofertas y promociones de SarahCash.</label>
-      </div>
+    <!-- Segunda sección: CURP y teléfono -->
+    <section id="paso2" class="hidden">
+      <h1>Completa tu información para continuar</h1>
+      <form>
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <input type="text" id="curp" name="curp" placeholder="Ingresa tu CURP" required />
+          <small>Puedes encontrar tu CURP en tu INE, estado de cuenta del AFORE, recibo de nómina o generarlo <a href="https://www.gob.mx/curp" target="_blank">aquí</a>.</small>
+        </div>
 
-      <button type="submit">Siguiente</button>
-    </form>
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <input type="tel" id="celular" name="celular" placeholder="Tu número celular" required />
+        </div>
+
+        <div class="form-group" style="margin-bottom: 2rem;">
+          <input type="tel" id="telefonoCasa" name="telefonoCasa" placeholder="Teléfono de casa u oficina" />
+        </div>
+
+        <button type="submit" style="background-color: #ccc; color: #666;" disabled>Comienza tu aplicación</button>
+        <br><br>
+        <button type="button" onclick="volverPaso1()" style="background-color: white; color: #0c2d48; border: 2px solid #0c2d48;">Regresar</button>
+      </form>
+    </section>
   </main>
 
   <script>
-    document.getElementById('registroForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert("Formulario enviado correctamente");
-      // window.location.href = "siguiente-pagina.html";
-    });
-<script>
-  document.getElementById('registroForm').addEventListener('submit', function(e) {
+    const registroForm = document.getElementById('registroForm');
+    const paso1 = document.getElementById('paso1');
+    const paso2 = document.getElementById('paso2');
     const correoInput = document.getElementById('correo');
     const correoError = document.getElementById('correoError');
 
-    if (!correoInput.checkValidity()) {
-      correoError.style.display = 'block';
-      correoInput.style.border = "2px solid red";
-      correoInput.focus();
+    registroForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      return;
-    } else {
-      correoError.style.display = 'none';
-      correoInput.style.border = ""; // Restaurar borde si se corrige
-    }
 
-    alert("Formulario enviado correctamente");
-    // Redirección opcional:
-    // window.location.href = "siguiente-pagina.html";
-  });
-</script>
+      if (!correoInput.checkValidity()) {
+        correoError.style.display = 'block';
+        correoInput.style.border = "2px solid red";
+        correoInput.focus();
+        return;
+      } else {
+        correoError.style.display = 'none';
+        correoInput.style.border = "";
+      }
+
+      paso1.classList.add('hidden');
+      paso2.classList.remove('hidden');
+    });
+
+    function volverPaso1() {
+      paso2.classList.add('hidden');
+      paso1.classList.remove('hidden');
+    }
+  </script>
 
 </body>
 </html>
