@@ -153,16 +153,18 @@
     }
 
     @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
+  header {
+    flex-direction: column;
+    align-items: flex-start; /* antes estaba en center */
+    text-align: left; /* alinear texto a la izquierda */
+  }
       nav {
         flex-direction: column;
         gap: 0.5rem;
         margin-top: 1rem;
-      }
+     align-items: flex-start; /* alinea también el menú */
+  }
+}
       .hero-content {
         flex-direction: column;
       }
@@ -170,6 +172,7 @@
         margin-top: 1rem;
       }
       header img {
+    align-self: flex-start; /* asegura que la imagen quede a la izquierda */
         height: 70px;
       }
     }
