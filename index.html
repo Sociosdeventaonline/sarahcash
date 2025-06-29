@@ -210,6 +210,35 @@
     </div>
   </section>
 
-  <!-- Las siguientes secciones quedan igual -->
+<script>
+  let currentAmount = 200;
+
+  function updateAmount(value) {
+    document.getElementById('amount').textContent = value;
+    let payment = 0;
+    const amount = parseFloat(value);
+    const interest = 0.15;
+
+    if (amount <= 250) {
+      payment = amount * (1 + interest); // 1 quincena
+    } else {
+      payment = (amount * (1 + interest)) / 2; // 2 quincenas
+    }
+
+    document.getElementById('payment').textContent = payment.toFixed(2);
+  }
+
+  function changeAmount(change) {
+    const newAmount = currentAmount + change;
+    if (newAmount >= 200 && newAmount <= 500) {
+      currentAmount = newAmount;
+      updateAmount(currentAmount);
+    }
+  }
+
+  // Inicializa valores al cargar
+  updateAmount(currentAmount);
+</script>
+
 </body>
 </html>
