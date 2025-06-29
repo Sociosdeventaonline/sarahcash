@@ -463,9 +463,11 @@
     telefonoCasa.addEventListener("input", validarPaso2);
 
 function irAPaso3() {
-  paso2.classList.add('hidden'); // Oculta el paso 2
-  document.getElementById('paso3').classList.remove('hidden'); // Muestra el paso 3
+  paso2.classList.add('hidden');
+  document.getElementById('paso3').classList.remove('hidden');
+  document.getElementById('paso4').classList.add('hidden'); // <-- Asegura que paso4 esté oculto
 }
+
 
 
   let confirmationResult;
