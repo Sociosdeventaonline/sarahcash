@@ -21,15 +21,14 @@
     header img {
       height: 200px;
     }
-  nav {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-  }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
     nav a {
       color: #ffffff;
       text-decoration: none;
-      margin: 0 1rem;
       font-weight: 500;
     }
     .hero {
@@ -134,12 +133,6 @@
     }
   </style>
 </head>
-
-
-
-
-
-  
 <body>
   <header>
     <img src="LogoSarahcash_sin_fondo.png" alt="SarahCash Logo" />
@@ -149,9 +142,7 @@
       <a href="#">Ayuda</a>
       <a href="#">Blog</a>
       <a href="#" style="color: #a855f7; font-weight: bold;">Solicítalo ahora</a>
-
     </nav>
-
   </header>
 
   <section class="hero">
@@ -159,45 +150,41 @@
       <h1>Te prestamos hasta $500</h1>
       <p>Consigue el dinero que necesitas ¡al instante! Sin complicaciones, 100% en línea.</p>
     </div>
-    <div style="display: flex; justify-content: center;">
+    <div style="display: flex; justify-content: center; align-items: center; gap: 2rem;">
+      <img src="mujer-feliz-sin-fondo.png" alt="Mujer feliz" style="max-width: 200px; height: auto;">
       <div class="loan-box">
-      <div class="loan-controls">
-        <button onclick="changeAmount(-50)">−</button>
-        <h2>$<span id="amount">200</span></h2>
-        <button onclick="changeAmount(50)">+</button>
+        <div class="loan-controls">
+          <button onclick="changeAmount(-50)">−</button>
+          <h2>$<span id="amount">200</span></h2>
+          <button onclick="changeAmount(50)">+</button>
+        </div>
+        <p>Pago quincenal estimado:<br><strong>$<span id="payment">230.00</span></strong></p>
+        <button>¡Solicítalo ahora!</button>
+        <small>Necesitarás: Identificación oficial vigente y cuenta bancaria a tu nombre.</small>
       </div>
-      <p>Pago quincenal estimado:<br><strong>$<span id="payment">230.00</span></strong></p>
-      <button>¡Solicítalo ahora!</button>
-      <small>Necesitarás: Identificación oficial vigente y cuenta bancaria a tu nombre.</small>
-          </div>
     </div>
   </section>
 
-<section class="steps-section" style="background-color: #ffffff; padding: 3rem 1rem; text-align: center; border-radius: 40px 40px 0 0;">
-  <h2 style="color: #000000; font-size: 2rem; margin-bottom: 2rem;">Solicita tu préstamo en línea con tan solo <strong>3 pasos</strong></h2>
-  <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 2rem;">
-    
-    <div style="flex: 1; min-width: 250px; max-width: 300px;">
-      <img src="icono-paso1.png" alt="Icono paso 1" style="background-color: #e6f5fc; border-radius: 50%; padding: 1rem; width: 60px; margin-bottom: 1rem;">
-      <h3 style="color: #000000;">Completa la aplicación en línea</h3>
-      <p style="color: #333333;">Te tomará menos de 10 minutos. Ten a la mano una identificación oficial vigente y un estado de cuenta bancario.</p>
+  <section class="steps-section" style="background-color: #ffffff; padding: 3rem 1rem; text-align: center; border-radius: 40px 40px 0 0;">
+    <h2 style="color: #000000; font-size: 2rem; margin-bottom: 2rem;">Solicita tu préstamo en línea con tan solo <strong>3 pasos</strong></h2>
+    <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 2rem;">
+      <div style="flex: 1; min-width: 250px; max-width: 300px;">
+        <img src="icono-paso1.png" alt="Icono paso 1" style="background-color: #e6f5fc; border-radius: 50%; padding: 1rem; width: 60px; margin-bottom: 1rem;">
+        <h3 style="color: #000000;">Completa la aplicación en línea</h3>
+        <p style="color: #333333;">Te tomará menos de 10 minutos. Ten a la mano una identificación oficial vigente y un estado de cuenta bancario.</p>
+      </div>
+      <div style="flex: 1; min-width: 250px; max-width: 300px;">
+        <img src="icono-paso2.png" alt="Icono paso 2" style="background-color: #e6f5fc; border-radius: 50%; padding: 1rem; width: 60px; margin-bottom: 1rem;">
+        <h3 style="color: #000000;">Recibe nuestra llamada de validación</h3>
+        <p style="color: #333333;">Confirmamos que tengas el mejor producto posible.</p>
+      </div>
+      <div style="flex: 1; min-width: 250px; max-width: 300px;">
+        <img src="icono-paso3.png" alt="Icono paso 3" style="background-color: #e6f5fc; border-radius: 50%; padding: 1rem; width: 60px; margin-bottom: 1rem;">
+        <h3 style="color: #000000;">Tu dinero en menos de 24 horas</h3>
+        <p style="color: #333333;">Depositamos directo en tu cuenta bancaria.</p>
+      </div>
     </div>
-
-    <div style="flex: 1; min-width: 250px; max-width: 300px;">
-      <img src="icono-paso2.png" alt="Icono paso 2" style="background-color: #e6f5fc; border-radius: 50%; padding: 1rem; width: 60px; margin-bottom: 1rem;">
-      <h3 style="color: #000000;">Recibe nuestra llamada de validación</h3>
-      <p style="color: #333333;">Confirmamos que tengas el mejor producto posible.</p>
-    </div>
-
-    <div style="flex: 1; min-width: 250px; max-width: 300px;">
-      <img src="icono-paso3.png" alt="Icono paso 3" style="background-color: #e6f5fc; border-radius: 50%; padding: 1rem; width: 60px; margin-bottom: 1rem;">
-      <h3 style="color: #000000;">Tu dinero en menos de 24 horas</h3>
-      <p style="color: #333333;">Depositamos directo en tu cuenta bancaria.</p>
-    </div>
-
-  </div>
-</section>
-
+  </section>
 
   <section class="benefits">
     <span>✅ Fácil</span>
@@ -214,11 +201,6 @@
   <footer>
     &copy; 2025 SarahCash. Todos los derechos reservados.
   </footer>
-
-
-
-
-
 
   <script>
     let currentAmount = 200;
@@ -248,7 +230,5 @@
 
     updateAmount(currentAmount);
   </script>
-
-
 </body>
 </html>
