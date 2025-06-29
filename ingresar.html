@@ -178,10 +178,12 @@
         </div>
 
         <div class="form-group" style="margin-bottom: 2rem;">
-          <input type="tel" id="telefonoCasa" name="telefonoCasa" placeholder="Teléfono de casa u oficina" />
+          <input type="tel" id="telefonoCasa" name="telefonoCasa" placeholder="Teléfono de casa u oficina" required />
         </div>
 
-        <button type="submit" style="background-color: #ccc; color: #666;" disabled>Comienza tu aplicación</button>
+        <button id="btnAplicacion" type="submit" style="background-color: #ccc; color: #666;" disabled>
+          Comienza tu aplicación
+        </button>
         <br><br>
         <button type="button" onclick="volverPaso1()" style="background-color: white; color: #0c2d48; border: 2px solid #0c2d48;">Regresar</button>
       </form>
@@ -194,6 +196,11 @@
     const paso2 = document.getElementById('paso2');
     const correoInput = document.getElementById('correo');
     const correoError = document.getElementById('correoError');
+
+    const curp = document.getElementById('curp');
+    const celular = document.getElementById('celular');
+    const telefonoCasa = document.getElementById('telefonoCasa');
+    const btnAplicacion = document.getElementById('btnAplicacion');
 
     registroForm.addEventListener('submit', function(e) {
       e.preventDefault();
@@ -216,6 +223,28 @@
       paso2.classList.add('hidden');
       paso1.classList.remove('hidden');
     }
+
+    function validarPaso2() {
+      const curpValido = curp.value.trim().length > 0;
+      const celularValido = celular.value.trim().length > 0;
+      const telefonoValido = telefonoCasa.value.trim().length > 0;
+
+      if (curpValido && celularValido && telefonoValido) {
+        btnAplicacion.disabled = false;
+        btnAplicacion.style.backgroundColor = "#0c2d48";
+        btnAplicacion.style.color = "#ffffff";
+        btnAplicacion.style.cursor = "pointer";
+      } else {
+        btnAplicacion.disabled = true;
+        btnAplicacion.style.backgroundColor = "#ccc";
+        btnAplicacion.style.color = "#666";
+        btnAplicacion.style.cursor = "default";
+      }
+    }
+
+    curp.addEventListener("input", validarPaso2);
+    celular.addEventListener("input", validarPaso2);
+    telefonoCasa.addEventListener("input", validarPaso2);
   </script>
 
 </body>
