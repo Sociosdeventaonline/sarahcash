@@ -475,26 +475,40 @@ function irAPaso3() {
   let timerInterval;
 
   function irAPaso4() {
-    const phoneNumber = "+52" + document.getElementById("celular").value;
+  const rawPhone = document.getElementById("celular").value.replace(/\D/g, '');
+  if (rawPhone.length !== 10) {
+    alert("El número de celular debe tener 10 dígitos.");
+    return;
+  }
 
-    // Mostrar siguiente paso
-    document.getElementById("paso3").classList.add("hidden");
-    document.getElementById("paso4").classList.remove("hidden");
+  const phoneNumber = "+52" + rawPhone;
 
-    // Renderiza el captcha invisible
-    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-      size: 'invisible'
-    });
+  // Oculta paso3 y muestra paso4
+  document.getElementById("paso3").classList.add("hidden");
+  document.getElementById("paso4").classList.remove("hidden");
 
+  // Re-renderizar recaptcha para evitar errores de reuso
+  document.getElementById("recaptcha-container").innerHTML = "";
+
+  window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+    size: 'invisible',
+    callback: function(response) {
+      console.log("reCAPTCHA resuelto");
+    }
+  });
+
+  window.recaptchaVerifier.render().then(() => {
     firebase.auth().signInWithPhoneNumber(phoneNumber, window.recaptchaVerifier)
-      .then(function (result) {
+      .then(function(result) {
         confirmationResult = result;
         iniciarTemporizador();
-        console.log("Código enviado");
-      }).catch(function (error) {
-        alert("Error al enviar el SMS: " + error.message);
+        console.log("✅ Código enviado a " + phoneNumber);
+      }).catch(function(error) {
+        alert("❌ Error al enviar SMS: " + error.message);
       });
-  }
+  });
+}
+
 
   function reenviarCodigo() {
     document.getElementById("recaptcha-container").innerHTML = ""; // Reinicia captcha
