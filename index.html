@@ -18,13 +18,12 @@
       padding: 1rem 2rem;
       background-color: #0c2d48;
       gap: 1rem;
-}
     }
-header img {
-  height: 60px;
-  max-height: 60px;
-  object-fit: contain;
-}
+    header img {
+      height: 60px;
+      max-height: 60px;
+      object-fit: contain;
+    }
     nav {
       display: flex;
       align-items: center;
@@ -36,18 +35,18 @@ header img {
       font-weight: 500;
     }
     .hero {
-      padding: 3rem 2rem;
+      padding: 4rem 2rem;
       background-color: #0c2d48;
     }
-    .hero-text {
-      max-width: 500px;
-    }
-    .hero-text h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-    .hero-text p {
-      font-size: 1.2rem;
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      text-align: center;
     }
     .loan-box {
       background: #ffffff;
@@ -55,7 +54,7 @@ header img {
       padding: 2rem;
       color: #000000;
       max-width: 340px;
-      margin-top: 2rem;
+      margin-top: 1rem;
       text-align: center;
     }
     .loan-box h2 {
@@ -150,21 +149,23 @@ header img {
   </header>
 
   <section class="hero">
-    <div style="text-align: center;">
-      <h1>Te prestamos hasta $500</h1>
-      <p>Consigue el dinero que necesitas ¡al instante! Sin complicaciones, 100% en línea.</p>
-    </div>
-    <div style="display: flex; justify-content: center; align-items: center; gap: 2rem;">
-      <img src="mujer-feliz-sin-fondo.png" alt="Mujer feliz" style="max-width: 200px; height: auto;">
-      <div class="loan-box">
-        <div class="loan-controls">
-          <button onclick="changeAmount(-50)">−</button>
-          <h2>$<span id="amount">200</span></h2>
-          <button onclick="changeAmount(50)">+</button>
+    <div class="hero-content">
+      <div style="flex: 1; min-width: 280px;">
+        <img src="mujer-feliz-sin-fondo.png" alt="Mujer feliz" style="max-width: 100%; height: auto;">
+      </div>
+      <div style="flex: 1; min-width: 320px;">
+        <h1 style="color: white; font-size: 2rem; margin-bottom: 0.5rem;">Te prestamos hasta $500</h1>
+        <p style="color: white; font-size: 1.1rem; margin-bottom: 1.5rem;">Consigue el dinero que necesitas ¡al instante! Sin complicaciones, 100% en línea.</p>
+        <div class="loan-box">
+          <div class="loan-controls">
+            <button onclick="changeAmount(-50)">−</button>
+            <h2>$<span id="amount">200</span></h2>
+            <button onclick="changeAmount(50)">+</button>
+          </div>
+          <p>Pago quincenal estimado:<br><strong>$<span id="payment">230.00</span></strong></p>
+          <button>¡Solicítalo ahora!</button>
+          <small>Necesitarás: Identificación oficial vigente y cuenta bancaria a tu nombre.</small>
         </div>
-        <p>Pago quincenal estimado:<br><strong>$<span id="payment">230.00</span></strong></p>
-        <button>¡Solicítalo ahora!</button>
-        <small>Necesitarás: Identificación oficial vigente y cuenta bancaria a tu nombre.</small>
       </div>
     </div>
   </section>
