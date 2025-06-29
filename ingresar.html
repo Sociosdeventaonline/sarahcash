@@ -181,13 +181,139 @@
           <input type="tel" id="telefonoCasa" name="telefonoCasa" placeholder="Teléfono de casa u oficina" required />
         </div>
 
-        <button id="btnAplicacion" type="submit" style="background-color: #ccc; color: #666;" disabled>
-          Comienza tu aplicación
-        </button>
+<button id="btnAplicacion" type="button" onclick="irAPaso3()" style="background-color: #ccc; color: #666;" disabled>
+  Comienza tu aplicación
+</button>
         <br><br>
         <button type="button" onclick="volverPaso1()" style="background-color: white; color: #0c2d48; border: 2px solid #0c2d48;">Regresar</button>
       </form>
     </section>
+
+    <section id="paso3" class="hidden">
+  <h1>Por favor, completa tu registro</h1>
+  <form>
+    <div class="form-row">
+      <div class="form-group" style="flex: 1 1 45%;">
+        <label>Ingresa tu correo electrónico</label>
+        <input type="email" id="email3" required />
+      </div>
+      <div class="form-group" style="flex: 1 1 45%;">
+        <label>Confirma tu correo electrónico</label>
+        <input type="email" id="emailConfirm" required />
+        <small id="emailError" style="color: red; display: none;">Los correos no coinciden o no son válidos.</small>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group" style="flex: 1 1 45%;">
+        <label>Contraseña</label>
+        <input type="password" id="password" required />
+      </div>
+      <div class="form-group" style="flex: 1 1 45%;">
+        <label>Confirmar contraseña</label>
+        <input type="password" id="passwordConfirm" required />
+        <small id="passError" style="color: red; display: none;">Las contraseñas no coinciden.</small>
+      </div>
+    </div>
+
+    <p>La contraseña debe tener:</p>
+    <ul id="requisitosPass" style="list-style: none; padding-left: 0; margin-bottom: 1rem;">
+      <li id="r1">🔴 8-20 caracteres</li>
+      <li id="r2">🔴 Letras (a-z)</li>
+      <li id="r3">🔴 Mayúsculas (A-Z)</li>
+      <li id="r4">🔴 Números (0-9)</li>
+      <li id="r5">🔴 Caracter especial (!@#$...)</li>
+    </ul>
+
+    <div class="checkbox">
+      <input type="checkbox" id="chkConsulta" />
+      <label for="chkConsulta"><strong>Acepto que se consulte mi historial crediticio</strong></label>
+    </div>
+
+    <div class="checkbox">
+      <input type="checkbox" id="chkPoliticas" />
+      <label for="chkPoliticas">He leído y acepto las <a href="#">políticas de privacidad</a></label>
+    </div>
+
+    <div class="checkbox">
+      <input type="checkbox" id="chkPromos" />
+      <label for="chkPromos">Acepto recibir noticias, ofertas e información relevante</label>
+    </div>
+
+    <button id="btnPaso3" type="submit" style="background-color: #ccc; color: #666;" disabled>Siguiente</button>
+  </form>
+</section>
+
+<script>
+  const email3 = document.getElementById("email3");
+  const emailConfirm = document.getElementById("emailConfirm");
+  const password = document.getElementById("password");
+  const passwordConfirm = document.getElementById("passwordConfirm");
+  const btnPaso3 = document.getElementById("btnPaso3");
+
+  const chkConsulta = document.getElementById("chkConsulta");
+  const chkPoliticas = document.getElementById("chkPoliticas");
+
+  const emailError = document.getElementById("emailError");
+  const passError = document.getElementById("passError");
+
+  const r1 = document.getElementById("r1");
+  const r2 = document.getElementById("r2");
+  const r3 = document.getElementById("r3");
+  const r4 = document.getElementById("r4");
+  const r5 = document.getElementById("r5");
+
+  function validarPaso3() {
+    const correoValido = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/.test(email3.value);
+    const correosCoinciden = email3.value === emailConfirm.value;
+
+    const pass = password.value;
+    const passCoincide = pass === passwordConfirm.value;
+
+    const largo = pass.length >= 8 && pass.length <= 20;
+    const letras = /[a-z]/.test(pass);
+    const mayus = /[A-Z]/.test(pass);
+    const numeros = /[0-9]/.test(pass);
+    const especiales = /[^a-zA-Z0-9]/.test(pass);
+
+    // Visual para los requisitos
+    r1.innerText = `${largo ? "🟢" : "🔴"} 8-20 caracteres`;
+    r1.style.color = largo ? "#0c2d48" : "red";
+
+    r2.innerText = `${letras ? "🟢" : "🔴"} Letras (a-z)`;
+    r2.style.color = letras ? "#0c2d48" : "red";
+
+    r3.innerText = `${mayus ? "🟢" : "🔴"} Mayúsculas (A-Z)`;
+    r3.style.color = mayus ? "#0c2d48" : "red";
+
+    r4.innerText = `${numeros ? "🟢" : "🔴"} Números (0-9)`;
+    r4.style.color = numeros ? "#0c2d48" : "red";
+
+    r5.innerText = `${especiales ? "🟢" : "🔴"} Caracter especial`;
+    r5.style.color = especiales ? "#0c2d48" : "red";
+
+    // Errores visibles
+    emailError.style.display = correoValido && correosCoinciden ? "none" : "block";
+    passError.style.display = passCoincide ? "none" : "block";
+
+    const todosValidos = correoValido && correosCoinciden &&
+      largo && letras && mayus && numeros && especiales &&
+      passCoincide && chkConsulta.checked && chkPoliticas.checked;
+
+    btnPaso3.disabled = !todosValidos;
+    btnPaso3.style.backgroundColor = todosValidos ? "#0c2d48" : "#ccc";
+    btnPaso3.style.color = todosValidos ? "#fff" : "#666";
+    btnPaso3.style.cursor = todosValidos ? "pointer" : "default";
+  }
+
+  [email3, emailConfirm, password, passwordConfirm, chkConsulta, chkPoliticas].forEach(el => {
+    el.addEventListener("input", validarPaso3);
+    el.addEventListener("change", validarPaso3);
+  });
+</script>
+
+
+
   </main>
 
   <script>
@@ -245,6 +371,13 @@
     curp.addEventListener("input", validarPaso2);
     celular.addEventListener("input", validarPaso2);
     telefonoCasa.addEventListener("input", validarPaso2);
+
+function irAPaso3() {
+  paso2.classList.add('hidden'); // Oculta el paso 2
+  document.getElementById('paso3').classList.remove('hidden'); // Muestra el paso 3
+}
+
+
   </script>
 
 </body>
