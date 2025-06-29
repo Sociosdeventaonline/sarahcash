@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro - SarahCash</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #0c2d48;
+    }
+    header img {
+      height: 50px;
+    }
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 2rem;
+    }
+    h1 {
+      color: #0c2d48;
+      margin-bottom: 1.5rem;
+    }
+    form {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+    label {
+      display: block;
+      margin: 0.5rem 0 0.2rem;
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .row {
+      display: flex;
+      gap: 1rem;
+    }
+    .row > div {
+      flex: 1;
+    }
+    .checkbox {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    .checkbox input {
+      margin-right: 0.5rem;
+    }
+    button {
+      background-color: #0c2d48;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #09314f;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="LogoSarahcash_sin_fondo.png" alt="Logo SarahCash" />
+  </header>
+
+  <main>
+    <h1>Regístrate, por favor</h1>
+    <form id="registroForm">
+      <div class="row">
+        <div>
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" required />
+        </div>
+        <div>
+          <label for="segundoNombre">Segundo nombre (opcional)</label>
+          <input type="text" id="segundoNombre" name="segundoNombre" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label for="apellidoPaterno">Apellido paterno</label>
+          <input type="text" id="apellidoPaterno" name="apellidoPaterno" required />
+        </div>
+        <div>
+          <label for="apellidoMaterno">Apellido materno</label>
+          <input type="text" id="apellidoMaterno" name="apellidoMaterno" required />
+        </div>
+      </div>
+
+      <label for="correo">Correo electrónico</label>
+      <input type="email" id="correo" name="correo" required />
+
+      <div class="checkbox">
+        <input type="checkbox" id="noticias" name="noticias" />
+        <label for="noticias">Deseo recibir noticias sobre ofertas y promociones</label>
+      </div>
+
+      <button type="submit">Siguiente</button>
+    </form>
+  </main>
+
+  <script>
+    document.getElementById('registroForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('Formulario válido. Redireccionando a la siguiente página...');
+      // Aquí iría el redireccionamiento o envío de datos.
+      // window.location.href = 'siguiente-pagina.html';
+    });
+  </script>
+
+</body>
+</html>
