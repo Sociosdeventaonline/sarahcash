@@ -10,73 +10,96 @@
       font-family: 'Segoe UI', sans-serif;
       background-color: #f4f4f4;
     }
+
     header {
-      display: flex;
-      align-items: center;
-      padding: 1rem 2rem;
       background-color: #0c2d48;
+      padding: 1rem 2rem;
     }
+
     header img {
       height: 50px;
     }
+
     main {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
       padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
+
     h1 {
       color: #0c2d48;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
+      font-size: 1.8rem;
+      text-align: center;
     }
+
     form {
-      background-color: #fff;
+      background-color: #ffffff;
       padding: 2rem;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 700px;
       width: 100%;
-      max-width: 600px;
     }
+
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      flex: 1 1 45%;
+      display: flex;
+      flex-direction: column;
+    }
+
     label {
-      display: block;
-      margin: 0.5rem 0 0.2rem;
+      margin-bottom: 0.3rem;
       font-weight: bold;
     }
+
     input[type="text"],
     input[type="email"] {
-      width: 100%;
       padding: 0.8rem;
-      margin-bottom: 1rem;
       border: 1px solid #ccc;
-      border-radius: 5px;
+      border-radius: 6px;
     }
-    .row {
-      display: flex;
-      gap: 1rem;
-    }
-    .row > div {
-      flex: 1;
-    }
+
     .checkbox {
       display: flex;
       align-items: center;
-      margin-bottom: 1.5rem;
+      margin: 1rem 0;
     }
+
     .checkbox input {
       margin-right: 0.5rem;
     }
+
     button {
       background-color: #0c2d48;
       color: white;
-      padding: 0.8rem 1.5rem;
       border: none;
-      border-radius: 5px;
+      padding: 0.9rem 1.5rem;
+      border-radius: 6px;
       font-size: 1rem;
       cursor: pointer;
     }
+
     button:hover {
       background-color: #09314f;
+    }
+
+    @media (max-width: 600px) {
+      .form-group {
+        flex: 1 1 100%;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
@@ -89,34 +112,38 @@
   <main>
     <h1>Regístrate, por favor</h1>
     <form id="registroForm">
-      <div class="row">
-        <div>
+      <div class="form-row">
+        <div class="form-group">
           <label for="nombre">Nombre</label>
           <input type="text" id="nombre" name="nombre" required />
         </div>
-        <div>
-          <label for="segundoNombre">Segundo nombre (opcional)</label>
+        <div class="form-group">
+          <label for="segundoNombre">Segundo nombre (en caso de tenerlo)</label>
           <input type="text" id="segundoNombre" name="segundoNombre" />
         </div>
       </div>
 
-      <div class="row">
-        <div>
+      <div class="form-row">
+        <div class="form-group">
           <label for="apellidoPaterno">Apellido paterno</label>
           <input type="text" id="apellidoPaterno" name="apellidoPaterno" required />
         </div>
-        <div>
+        <div class="form-group">
           <label for="apellidoMaterno">Apellido materno</label>
           <input type="text" id="apellidoMaterno" name="apellidoMaterno" required />
         </div>
       </div>
 
-      <label for="correo">Correo electrónico</label>
-      <input type="email" id="correo" name="correo" required />
+      <div class="form-row">
+        <div class="form-group" style="flex: 1 1 100%;">
+          <label for="correo">Correo electrónico</label>
+          <input type="email" id="correo" name="correo" required />
+        </div>
+      </div>
 
       <div class="checkbox">
         <input type="checkbox" id="noticias" name="noticias" />
-        <label for="noticias">Deseo recibir noticias sobre ofertas y promociones</label>
+        <label for="noticias">Deseo recibir noticias sobre ofertas y promociones de SarahCash.</label>
       </div>
 
       <button type="submit">Siguiente</button>
@@ -124,11 +151,10 @@
   </main>
 
   <script>
-    document.getElementById('registroForm').addEventListener('submit', function (e) {
+    document.getElementById('registroForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      alert('Formulario válido. Redireccionando a la siguiente página...');
-      // Aquí iría el redireccionamiento o envío de datos.
-      // window.location.href = 'siguiente-pagina.html';
+      alert("Formulario enviado correctamente");
+      // window.location.href = "siguiente-pagina.html";
     });
   </script>
 
